@@ -1,0 +1,19 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana-data:/var/lib/grafana
+    command: >
+      sh -c "grafana-cli plugins install alexanderzobnin-zabbix-app &&
+      /run.sh"
+    restart: always
+
+volumes:
+  grafana-data:
